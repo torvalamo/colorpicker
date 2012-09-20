@@ -1,0 +1,139 @@
+<!--
+    Author: Tor-Ivar Valåmo (borland@frisurf.no)
+    --
+    You can use this any way you want, as long as you let me see it. :-P
+    You also have to include the fact that I made it. ;-)
+-->
+
+<html>
+<head>
+  <style type="text/css">
+    * {
+      font-family:Verdana,Helvetica,Arial;
+      font-size:12px;
+    }
+    TD {
+      width:26px;
+      height:26px;
+      cursor:pointer;
+      text-align:center;
+    }
+    TD.col {
+      width:46px;
+      cursor:none;
+      text-align:left;
+    }
+    TD.num {
+      cursor:none;
+    }
+    TD.btn {
+      width:135px;
+      height:30px;
+      background-color:#CCCCCC;
+    }
+    TD.desc {
+      width:289px;
+    }
+    TABLE {
+      width:299px;
+      height:110px;
+      border:1px solid #000000;
+    }
+  </style>
+  <script type="text/javascript">
+    var currentRed = '00';
+    var currentGreen = '00';
+    var currentBlue = '00';
+
+    var colors = new Array('red','green','blue');
+    var steps = new Array('00','33','66','99','CC','FF');
+
+    function selectRed(hex) {
+      currentRed=hex;
+      setColor();
+    }
+
+    function selectGreen(hex) {
+      currentGreen=hex;
+      setColor();
+    }
+
+    function selectBlue(hex) {
+      currentBlue=hex;
+      setColor();
+    }
+    
+    function setColor() {
+      red=currentRed;
+      green=currentGreen;
+      blue=currentBlue;
+      for(var c=0;c<colors.length;c++) {
+        for(var s=0;s<steps.length;s++) {
+          document.getElementById(colors[c]+steps[s]).style.backgroundColor="#"+((c==0)?steps[s]:red)+((c==1)?steps[s]:green)+((c==2)?steps[s]:blue);
+        }
+        document.getElementById(colors[c]+"num").innerHTML=eval("current"+((c==0)?"Red":((c==1)?"Green":((c==2)?"Blue":false))));
+      }
+      document.getElementById("collect").style.backgroundColor="#"+red+green+blue;
+    }
+
+    function btnOver(obj) {
+      obj.style.backgroundColor="#DDDDDD";
+    }
+
+    function btnOut(obj) {
+      obj.style.backgroundColor="#CCCCCC";
+    }
+    
+    function btnClick() {
+      alert( "#"+currentRed+currentGreen+currentBlue );
+    }
+    
+    window.onload = function() {
+      setColor();
+    }
+  </script>
+</head>
+<body>
+
+<table cellspacing="5">
+  <tr>
+    <td colspan="8" class="desc">Click on the coloured squares below to<br>find the color that you want.</td>
+  </tr>
+  <tr>
+    <td class="col">Red</td>
+    <td onClick="selectRed('00');" id="red00"></td>
+    <td onClick="selectRed('33');" id="red33"></td>
+    <td onClick="selectRed('66');" id="red66"></td>
+    <td onClick="selectRed('99');" id="red99"></td>
+    <td onClick="selectRed('CC');" id="redCC"></td>
+    <td onClick="selectRed('FF');" id="redFF"></td>
+    <td class="num" id="rednum"></td>
+  </tr>
+  <tr>
+    <td class="col">Green</td>
+    <td onClick="selectGreen('00');" id="green00"></td>
+    <td onClick="selectGreen('33');" id="green33"></td>
+    <td onClick="selectGreen('66');" id="green66"></td>
+    <td onClick="selectGreen('99');" id="green99"></td>
+    <td onClick="selectGreen('CC');" id="greenCC"></td>
+    <td onClick="selectGreen('FF');" id="greenFF"></td>
+    <td class="num" id="greennum"></td>
+  </tr>
+  <tr>
+    <td class="col">Blue</td>
+    <td onClick="selectBlue('00');" id="blue00"></td>
+    <td onClick="selectBlue('33');" id="blue33"></td>
+    <td onClick="selectBlue('66');" id="blue66"></td>
+    <td onClick="selectBlue('99');" id="blue99"></td>
+    <td onClick="selectBlue('CC');" id="blueCC"></td>
+    <td onClick="selectBlue('FF');" id="blueFF"></td>
+    <td class="num" id="bluenum"></td>
+  </tr>
+  <tr>
+    <td colspan="4" id="collect"></td>
+    <td colspan="4" class="btn" onMouseOver="btnOver(this);" onMouseOut="btnOut(this);" onClick="btnClick();">Select Color</td>
+  </tr>
+</table>
+
+</body>
+</html>
